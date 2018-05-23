@@ -1,28 +1,84 @@
-.App {
+
+.body html {
+  padding: 0;
+  margin: auto;
+}
+
+header {
+  width: 100%;
+  text-align: center;
+  box-shadow: 5px 5px 5px black;
+  background-color: #000;
+  color: white;
+  flex: 1 1 auto; 
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 4 4 auto;
+}
+
+footer {
+  width: 100%;
+  text-align: center;
+  min-height: 30px;
+  flex: .20 1 auto;
+  background-color: black;
+}
+
+.picture {
+  height: 100px;
+  width: 100px;
   text-align: center;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+.app {
+  display: flex;
+  flex-direction: column;
+  background-color: grey;
+  justify-content: center;
   color: white;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
-.App-title {
-  font-size: 1.5em;
+.list-view {
+  order: 1;
+  background-color: #062f4f;
+  padding: 10px;
+  overflow-y: auto;
+  flex-grow: 1;
 }
 
-.App-intro {
-  font-size: large;
+.location-info {
+  max-width: 100%;
+  background-color: #b82601;
+  box-shadow: 5px 5px 5px black;
+  padding: 5px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.map-view {
+  order: 2;
+  background-color: #813772;
+  flex-grow: 2;
+  min-width: 50%;
+}
+
+.location-info {
+  margin: 5px auto 10px auto;
+}
+
+.button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 1px 3px 1px 3px;
+  font: inherit;
+  text-transform: uppercase;
+}
+
+#map {
+  background-color: green;
+  margin: auto;
+  padding: 0;
+  border: unset;
 }
