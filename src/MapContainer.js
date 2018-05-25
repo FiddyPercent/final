@@ -37,7 +37,7 @@ setAnimation = (props, marker) => {
           setTimeout(() => { 
             marker.setAnimation(null);
             this.setState({activeMarker: marker})
-            
+
             this.props.focus(this.state.activeMarker.venueId)
              }, 700); 
 
@@ -134,7 +134,7 @@ render(){
                                 onClick={this.onMarkerClick}
                                 venueId={place.id}
                                 name={place.name}
-                                title="bogus"
+                                title={place.name}
                                 Animation="null"
                                 position={{ lat: place.location.lat, lng: place.location.lng}}
                                 

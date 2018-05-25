@@ -8,7 +8,8 @@ class ListView extends Component {
 	state = {
 		value: "all",
 		venueDetails: [],
-		options: []
+		options: [],
+		updated: false
 	}
 
 	handleChange = (event) => {
@@ -22,18 +23,25 @@ class ListView extends Component {
 	 	this.props.getVenueDetails(this.state.venueDetails)
  	}
 
- 	componentDidMount() {
+ 	componentWillReceiveProps() {
+ 		this.setState({updated: true})
  	}
-/*
+
+ 	componentWillUnMount() {
+ 		this.setState({updated: false})
+ 		this.setState({venueDetails: []})
+ 	}
+
  	updateVenueDetails = (info) => {
  		var vd = this.state.venueDetails;
  		vd.push(info);
  		this.setState({venueDetails: vd});
  		this.setupOptions();
- 	}*/
+ 	}
 
  	//sets categories for filter
  	setupOptions = () => {
+ 		console.log("in the set up Options")
  		var o = [];
  		this.props.venueList.map(function (venue) { 
  			if (o.includes(venue.categories["0"].name) === false){
@@ -63,6 +71,9 @@ class ListView extends Component {
 				{this.props.venueList.map((p) => 
 				<LocInfo 
 					place={p}
+					updateVenueDetails={this.updateVenueDetails}
+					venueDetails={this.state.venueDetails}
+					update={this.state.update}
 					/>
 				)}
 			</selection>

@@ -3,21 +3,25 @@ import React, { Component } from 'react'
 
 class LocInfo extends Component {
 
+constructor(props) {
+    super(props);
 
 state = {
 	error: false,
 	venueInfo: {},
-	loadingInfo: true
+	loaded: true,
+	update: false
+	}
 }
-
 	 componentDidMount = () => {
- 	 this.getVenueInfo(this.state.venueInfo)
- 	 
+	 console.log("updating")
+ 	 this.getVenueInfo()
+ 	 this.setState({update: this.props.update}) 
  }
 
 
  selectPhoto = () => {
-
+ 	//console.log(this.state.venueInfo.venue.id);
  	if(this.state.venueInfo.venue === undefined || 
  		this.state.venueInfo.venue.photos.count < 1 ||
  		 this.state.venueInfo.venue.bestPhoto.visibility != "public"){
@@ -26,11 +30,20 @@ state = {
  	
  	}else{
  		//console.log(this.state.venueInfo.venue.bestPhoto.prefix + "100" +this.state.venueInfo.venue.bestPhoto.suffix)
+ 		console.log(this.state.venueInfo.venue.id +" ----- " +this.props.place.id);
  	return (this.state.venueInfo.venue.bestPhoto.prefix + "300x300" +this.state.venueInfo.venue.bestPhoto.suffix)
  	
  	}
  }
 
+what = () => {
+	if(this.state.venueInfo.venue != undefined){
+		//console.log("name the game " + this.state.venueInfo.venue.name)
+		return this.state.venueInfo.venue.name
+	}else{
+		return "idk man"
+	}
+}
 
 
 getVenueInfo = () => {
@@ -46,6 +59,7 @@ getVenueInfo = () => {
        //console.log(url);
              fetch(url)
              .then(response => {
+             	this.setState({loaded: false})
                 if (response.ok === false) {
                     this.setState({ error: true })
                 }
@@ -53,10 +67,10 @@ getVenueInfo = () => {
             })
             .then((json) => {
                 this.setState({ venueInfo: json.response })
-                //this.props.updateVenueDetails(this.state.venueInfo)
+                this.props.updateVenueDetails(this.state.venueInfo)
                
             })
-            .then(()=> this.setState({loadingInfo: false}))
+            .then(()=>(this.setState({loaded: true})))
             .catch(error => console.log(error))
     }
 
@@ -65,8 +79,8 @@ getVenueInfo = () => {
 
 		return ( 
 			<div className="location-info" tabIndex="-1">
-			
-				<div className="picture" style={{height: "300px", width: "300px", backgroundImage: "url(" + this.selectPhoto() + " )" }}></div>
+				
+				<div className="picture" style={{maxHeight: "300px", maxWidth: "300px",  }}>{this.state.loaded? this.what(): "fail"}</div>
 					<div id="loc-name"> {this.props.place.name} </div>
 					<div id="loc-address">{this.props.place.location.address} {"\n"} {this.props.place.location.city},  
 					  {" " + this.props.place.location.state} {this.props.place.location.postalCode }</div>
