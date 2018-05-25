@@ -77,8 +77,10 @@ footer {
 }
 
 #map {
-  background-color: green;
-  margin: auto;
-  padding: 0;
-  border: unset;
+ position: relative;
+ overflow: hidden;
+}
+
+map {
+  position: relative;
 }

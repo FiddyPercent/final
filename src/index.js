@@ -7,20 +7,8 @@ var mapElement,
     mapContainter,
     appElement;
 
-  window.onload = function() {
-    window.addEventListener("resize", setWindowHeight, false);
-    setWindowHeight();
-  };
 
-  //Used to dynamicly adjust height
-  function setWindowHeight() {
-    if (!mapElement) mapElement = document.querySelector("#map");
-    if (!appElement) appElement = document.querySelector(".app");
-    if (!mapContainter) mapContainter = document.querySelector('.list-view');
-    console.log(mapContainter.innerHeight);
-    mapElement.style.height =  mapContainter.innerHeight + "px";
-    appElement.style.height =  window.innerHeight + "px";
-  }
+
 
 
 
